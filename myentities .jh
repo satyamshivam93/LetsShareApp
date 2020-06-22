@@ -1,0 +1,57 @@
+entity MyPost {
+	userType UserType,
+    itemType ItemType,
+    description String,
+    createdBy Integer,
+    createdDate LocalDate,
+    modifiedBy Integer,
+    modifiedDate LocalDate,
+    myPostStatus MyPostStatus,
+    active Boolean
+}
+
+// an ignored comment
+/** not an ignored comment */
+entity MyPostResponse {
+	myPostResponse String,
+    postId Integer,
+    responderId Integer,
+    myPostReponseStatus MyPostReponseStatus,
+    createdBy Integer,
+    createdDate LocalDate,
+    modifiedBy Integer,
+    modifiedDate LocalDate,
+    comments String,
+    active Boolean
+}
+
+enum MyPostStatus{
+	AVAILABLE, UNAVAILABLE, COMPLETED
+}
+
+enum MyPostReponseStatus{
+	APPROVED, REJECT, INPROCESS
+}
+
+enum UserType{
+ DONOR, RECEIVER, VOLUNTEER
+}
+enum ItemType{
+ BOOKS, CLOTHS, FOOD
+}
+
+relationship OneToMany {
+	MyPost to MyPostResponse{myPost}
+}
+
+// Set pagination options
+paginate MyPost, MyPostResponse with infinite-scroll
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

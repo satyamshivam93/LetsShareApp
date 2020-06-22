@@ -1,0 +1,72 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="myPostResponse">
+            <h2><span>Post Response Id </span> {{ myPostResponse.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Post Response</span></dt>
+                <dd>
+                    <span>{{ myPostResponse.myPostResponse }}</span>
+                </dd>
+                <dt><span>Post Id </span></dt>
+                <dd>
+                    <div *ngIf="myPostResponse.myPost">
+                        <a [routerLink]="['/my-post', myPostResponse.myPost?.id, 'view']">{{ myPostResponse.myPost?.id }}</a>
+                    </div>
+                </dd>
+                <!-- <dt><span>Post Id</span></dt>
+                <dd>
+                    <span>{{ myPostResponse.postId }}</span>
+                </dd> -->
+                <dt><span>Responder Id</span></dt>
+                <dd>
+                    <span>{{ myPostResponse.responderId }}</span>
+                </dd>
+                <dt><span>Post Response Status</span></dt>
+                <dd>
+                    <span>{{ myPostResponse.myPostReponseStatus }}</span>
+                </dd>
+                <dt><span>Created By</span></dt>
+                <dd>
+                    <span>{{ myPostResponse.createdBy }}</span>
+                </dd>
+                <dt><span>Created Date</span></dt>
+                <dd>
+                    <span>{{ myPostResponse.createdDate }}</span>
+                </dd>
+                <dt><span>Modified By</span></dt>
+                <dd>
+                    <span>{{ myPostResponse.modifiedBy }}</span>
+                </dd>
+                <dt><span>Modified Date</span></dt>
+                <dd>
+                    <span>{{ myPostResponse.modifiedDate }}</span>
+                </dd>
+                <dt><span>Active</span></dt>
+                <dd>
+                    <span>{{ myPostResponse.active }}</span>
+                </dd>
+                <dt><span>Comments</span></dt>
+                <dd>
+                    <span>{{ myPostResponse.comments }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/my-post-response', myPostResponse.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

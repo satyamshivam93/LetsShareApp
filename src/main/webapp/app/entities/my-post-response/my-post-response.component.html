@@ -1,0 +1,86 @@
+<div>
+    <h2 id="page-heading">
+        <span>Post Responses</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-my-post-response" [routerLink]="['/my-post-response/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Post Response
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="myPostResponses?.length === 0">
+        <span>No Post Responses found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="myPostResponses && myPostResponses.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="myPostResponse"><span>Response</span> <fa-icon icon="sort"></fa-icon></th>
+                    <!-- <th scope="col"  jhiSortBy="postId"><span>Post Id</span> <fa-icon icon="sort"></fa-icon></th> -->
+                    <th scope="col"  jhiSortBy="myPost.id"><span>Post Id</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="responderId"><span>Responder Id</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="myPostReponseStatus"><span>Response Status</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="createdBy"><span>Created By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="createdDate"><span>Created Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="modifiedBy"><span>Modified By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="modifiedDate"><span>Modified Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="comments"><span>Comments</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="active"><span>Active</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let myPostResponse of myPostResponses ;trackBy: trackId">
+                    <td><a [routerLink]="['/my-post-response', myPostResponse.id, 'view']">{{ myPostResponse.id }}</a></td>
+                    <td>{{ myPostResponse.myPostResponse }}</td>
+                    <!-- <td>{{ myPostResponse.postId }}</td> -->
+                    <td>
+                        <div *ngIf="myPostResponse.myPost">
+                            <a [routerLink]="['/my-post', myPostResponse.myPost?.id, 'view']" >{{ myPostResponse.myPost?.id }}</a>
+                        </div>
+                    </td>
+                    <td>{{ myPostResponse.responderId }}</td>
+                    <td>{{ myPostResponse.myPostReponseStatus }}</td>
+                    <td>{{ myPostResponse.createdBy }}</td>
+                    <td>{{ myPostResponse.createdDate | date:'mediumDate' }}</td>
+                    <td>{{ myPostResponse.modifiedBy }}</td>
+                    <td>{{ myPostResponse.modifiedDate | date:'mediumDate' }}</td>
+                    <td>{{ myPostResponse.comments }}</td>
+                    <td>{{ myPostResponse.active }}</td>
+                    
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/my-post-response', myPostResponse.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/my-post-response', myPostResponse.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(myPostResponse)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="myPost">
+            <h2><span>Post Id</span> {{ myPost.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>User Type</span></dt>
+                <dd>
+                    <span>{{ myPost.userType }}</span>
+                </dd>
+                <dt><span>Item Type</span></dt>
+                <dd>
+                    <span>{{ myPost.itemType }}</span>
+                </dd>
+                <dt><span>Description</span></dt>
+                <dd>
+                    <span>{{ myPost.description }}</span>
+                </dd>
+                <!-- <dt><span>Created By</span></dt>
+                <dd>
+                    <span>{{ myPost.createdBy }}</span>
+                </dd>
+                <dt><span>Created Date</span></dt>
+                <dd>
+                    <span>{{ myPost.createdDate }}</span>
+                </dd>
+                <dt><span>Modified By</span></dt>
+                <dd>
+                    <span>{{ myPost.modifiedBy }}</span>
+                </dd>
+                <dt><span>Modified Date</span></dt>
+                <dd>
+                    <span>{{ myPost.modifiedDate }}</span>
+                </dd>
+                <dt><span>My Post Status</span></dt>
+                <dd>
+                    <span>{{ myPost.myPostStatus }}</span>
+                </dd>
+                <dt><span>Active</span></dt>
+                <dd>
+                    <span>{{ myPost.active }}</span>
+                </dd> -->
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/my-post', myPost.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

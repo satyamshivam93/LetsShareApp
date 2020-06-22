@@ -1,0 +1,77 @@
+<div>
+    <h2 id="page-heading">
+        <span>Posts</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-my-post" [routerLink]="['/my-post/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Post
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="myPosts?.length === 0">
+        <span>No Posts found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="myPosts && myPosts.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="userType"><span>User Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="itemType"><span>Item Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="description"><span>Description</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="createdBy" ><span>Created By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="createdDate" ><span>Created Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="modifiedBy" hidden="true"><span>Modified By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="modifiedDate" hidden="true"><span>Modified Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="myPostStatus" ><span>Post Status</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="active" ><span>Active</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let myPost of myPosts ;trackBy: trackId">
+                    <td><a [routerLink]="['/my-post', myPost.id, 'view']">{{ myPost.id }}</a></td>
+                    <td>{{ myPost.userType }}</td>
+                    <td>{{ myPost.itemType }}</td>
+                    <td>{{ myPost.description }}</td>
+                    <td>{{ myPost.createdBy }}</td>
+                    <td>{{ myPost.createdDate | date:'mediumDate' }}</td>
+                    <td hidden="true">{{ myPost.modifiedBy }}</td>
+                    <td hidden="true">{{ myPost.modifiedDate | date:'mediumDate' }}</td>
+                    <td >{{ myPost.myPostStatus }}</td>
+                    <td>{{ myPost.active }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/my-post', myPost.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/my-post', myPost.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(myPost)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

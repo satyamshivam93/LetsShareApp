@@ -1,0 +1,67 @@
+{
+  "name": "MyPostResponse",
+  "fields": [
+    {
+      "fieldName": "myPostResponse",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "postId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "responderId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "myPostReponseStatus",
+      "fieldType": "MyPostReponseStatus",
+      "fieldValues": "APPROVED,REJECT,INPROCESS"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "modifiedBy",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "modifiedDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "comments",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "active",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "myPost",
+      "otherEntityRelationshipName": "myPostResponse",
+      "relationshipName": "myPost",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200621173104",
+  "javadoc": "not an ignored comment",
+  "entityTableName": "my_post_response",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

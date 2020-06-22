@@ -1,0 +1,63 @@
+{
+  "name": "MyPost",
+  "fields": [
+    {
+      "fieldName": "userType",
+      "fieldType": "UserType",
+      "fieldValues": "DONOR,RECEIVER,VOLUNTEER"
+    },
+    {
+      "fieldName": "itemType",
+      "fieldType": "ItemType",
+      "fieldValues": "BOOKS,CLOTHS,FOOD"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "modifiedBy",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "modifiedDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "myPostStatus",
+      "fieldType": "MyPostStatus",
+      "fieldValues": "AVAILABLE,UNAVAILABLE,COMPLETED"
+    },
+    {
+      "fieldName": "active",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "myPostResponse",
+      "otherEntityRelationshipName": "myPost",
+      "relationshipName": "myPostResponse"
+    }
+  ],
+  "changelogDate": "20200621173004",
+  "entityTableName": "my_post",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

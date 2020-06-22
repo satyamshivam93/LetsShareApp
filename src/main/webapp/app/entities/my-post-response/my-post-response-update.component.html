@@ -1,0 +1,105 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-my-post-response-heading">Create or edit a Post Response</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_myPostResponse">Post Response</label>
+                    <input type="text" class="form-control" name="myPostResponse" id="field_myPostResponse"
+                           formControlName="myPostResponse"/>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-control-label" for="field_myPost">Post Id</label>
+                    <select class="form-control" id="field_myPost" name="myPost" formControlName="myPost">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="myPostOption.id === editForm.get('myPost')!.value?.id ? editForm.get('myPost')!.value : myPostOption" *ngFor="let myPostOption of myposts; trackBy: trackById">{{ myPostOption.id }}</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" hidden="true">
+                    <label class="form-control-label" for="field_postId">Post Id</label>
+                    <input type="number" class="form-control" name="postId" id="field_postId"
+                           formControlName="postId"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_responderId">Responder Id</label>
+                    <input type="number" class="form-control" name="responderId" id="field_responderId"
+                           formControlName="responderId"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_myPostReponseStatus">Post Response Status</label>
+                    <select class="form-control" name="myPostReponseStatus" formControlName="myPostReponseStatus" id="field_myPostReponseStatus">
+                        <option value="APPROVED">APPROVED</option>
+                        <option value="REJECT">REJECTED</option>
+                        <option value="INPROCESS">REQUESTED</option>
+                    </select>
+                </div>
+
+                <div class="form-group" hidden="true">
+                    <label class="form-control-label" for="field_createdBy">Created By</label>
+                    <input type="number" class="form-control" name="createdBy" id="field_createdBy"
+                           formControlName="createdBy"/>
+                </div>
+
+                <div class="form-group" hidden="true">
+                    <label class="form-control-label" for="field_createdDate">Created Date</label>
+                    <div class="input-group">
+                        <input id="field_createdDate" type="text" class="form-control" name="createdDate" ngbDatepicker #createdDateDp="ngbDatepicker" formControlName="createdDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="createdDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group" hidden="true">
+                    <label class="form-control-label" for="field_modifiedBy">Modified By</label>
+                    <input type="number" class="form-control" name="modifiedBy" id="field_modifiedBy"
+                           formControlName="modifiedBy"/>
+                </div>
+
+                <div class="form-group" hidden="true">
+                    <label class="form-control-label" for="field_modifiedDate">Modified Date</label>
+                    <div class="input-group">
+                        <input id="field_modifiedDate" type="text" class="form-control" name="modifiedDate" ngbDatepicker #modifiedDateDp="ngbDatepicker" formControlName="modifiedDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="modifiedDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_comments">Comments</label>
+                    <input type="text" class="form-control" name="comments" id="field_comments"
+                           formControlName="comments"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_active">Active</label>
+                    <input type="checkbox" class="form-control" name="active" id="field_active"
+                           formControlName="active"/>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

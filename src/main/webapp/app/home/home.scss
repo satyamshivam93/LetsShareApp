@@ -4,12 +4,17 @@ Main page styles
 
 .hipster {
   display: inline-block;
-  width: 347px;
-  height: 497px;
-  background: url('../../content/images/jhipster_family_member_2.svg') no-repeat center top;
+  width: 300px;
+  height: 100px;
+  background: url('../../content/images/donation.png') no-repeat center top;
   background-size: contain;
 }
-
+.about-section {
+  padding: 50px;
+  text-align: left;
+  background-color: #9caac7;
+  color: white;
+}
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
 @media only screen and (-webkit-min-device-pixel-ratio: 2),
   only screen and (-moz-min-device-pixel-ratio: 2),
